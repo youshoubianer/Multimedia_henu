@@ -19,6 +19,18 @@ def tf_idf():
             word = tempInputData.read()
             wordlist.append( word.split( ' ' ) )
 
+    # create the index_dict
+    index_dict = {}
+    for i in range( len( wordlist ) ):
+        for word in wordlist[i]:
+            if word not in index_dict:
+                index_dict[word] = [filename_list[i]]
+            elif filename_list[i] in index_dict[word]:
+                continue
+            else:
+                index_dict[word].append( filename_list[i] )
+    print index_dict
+
     # Calculate TF
     for doc in wordlist:
         doc_tf_dict = {}
